@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.aronkatona.model.Item;
+import com.aronkatona.service.ItemService;
+
 /**
  * Handles requests for the application home page.
  */
@@ -29,37 +34,20 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	private ItemService itemService;
+
+	@Autowired(required = true)
+	@Qualifier(value = "itemService")
+	public void setItemService(ItemService is) {
+		this.itemService = is;
+	}
+	
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String uploadFileForm() {
         return "uploadfile";
     }
  
-    /*@RequestMapping(value = "/saveFiles", method = RequestMethod.POST)
-    public String fileSave(@ModelAttribute("uploadForm") FileUpload uploadForm) throws IllegalStateException, IOException {
-      
-    	System.out.println("asd");
-        String rootPath = System.getProperty("catalina.home");
-        File dir = new File(rootPath + File.separator + "tmpFiles");
-        if (!dir.exists())
-            dir.mkdirs();
-        String saveDirectory = "F:/servers/apache-tomcat-8.0.9/tmpFiles/";
-        
-        
-        List<MultipartFile> uploadFiles = uploadForm.getFiles();
- 
- 
-        if (null != uploadFiles && uploadFiles.size() > 0) {
-            for (MultipartFile multipartFile : uploadFiles) {
- 
-                String fileName = multipartFile.getOriginalFilename();
-                if (!"".equalsIgnoreCase(fileName)) {
-                    multipartFile.transferTo(new File(saveDirectory + fileName));
-                }
-            }
-        }
- 
-        return "uploadSuccess";
-    }*/
+   
 	
 	@RequestMapping(value = "/saveFiles", method = RequestMethod.POST)
     public String fileSave( @RequestParam("file") MultipartFile[] files ) throws IllegalStateException, IOException{
@@ -72,12 +60,23 @@ public class HomeController {
 	
 	
         for (int i = 0; i < files.length; ++i) {
-        	 
+        	
+        	//server
             String fileName = files[i].getOriginalFilename();
             if (!"".equalsIgnoreCase(fileName)) {
             	files[i].transferTo(new File(saveDirectory + fileName));
             }
+            
+            //db
+            Item item = new Item();
+        	item.setImgAddress(files[i].getOriginalFilename());
+        	item.setName("asd");
+        	this.itemService.saveItem(item);
+        	
         }
+        
+        
+
         
 		return "uploadSuccess";
 	}
