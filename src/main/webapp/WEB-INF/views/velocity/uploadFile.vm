@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>uploadfile</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="./resources/js/addBonusRowFileUpload.js"></script>
+</head>
+<body>
+wq
+	<form name="fileUploadForm"   action="/controllerFileUploadVelocity/saveFiles"   method="post" enctype="multipart/form-data">
+		<table id="fileTable">
+                <tr>
+                    <td><input name="file" type="file" /></td>
+                </tr>
+        </table>
+		<input type="submit" value="Upload" /> <input id="addFile" type="button" value="Add File" />
+	</form>
+
+</body>
+</html>

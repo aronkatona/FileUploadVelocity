@@ -1,0 +1,12 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	#foreach($file in $files)
+		<li><a href="/controllerFileUploadVelocity/downloadFile.$file.getName()">$file.getName()</a></li>
+	#end
+
+</body>
+</html>
