@@ -39,6 +39,7 @@
 	<beans:bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
+	<!-- Database -->
 	<context:property-placeholder location="/WEB-INF/database.properties" />
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -69,6 +70,7 @@
 	</beans:bean>
 
 
+	<!-- DAO && Service-->
 	<beans:bean id="itemDAO" class="com.aronkatona.dao.ItemDAOImpl">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
@@ -76,6 +78,8 @@
 	<beans:bean id="itemService" class="com.aronkatona.service.ItemServiceImpl">
 		<beans:property name="itemDAO" ref="itemDAO"></beans:property>
 	</beans:bean>
+	
+	<!-- Transaction -->
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

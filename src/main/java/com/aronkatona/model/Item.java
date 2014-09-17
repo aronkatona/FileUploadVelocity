@@ -1,6 +1,8 @@
 package com.aronkatona.model;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,10 @@ public class Item {
 	private int id;
 	
 	private String name;
+	
+	private String owner;
+	
+	private Date buyTime;
 	
 	private String imgAddress;
 		
@@ -48,6 +54,22 @@ public class Item {
 
 	public void setImgAddress(String imgAddress) {
 		this.imgAddress = imgAddress;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public Date getBuyTime() {
+		return buyTime;
+	}
+
+	public void setBuyTime(Date buyTime) {
+		this.buyTime = buyTime;
 	}
 	
 	

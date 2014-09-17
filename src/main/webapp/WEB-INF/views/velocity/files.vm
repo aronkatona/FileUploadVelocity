@@ -1,12 +1,49 @@
 <html>
 <head>
 	<title></title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script>
+  $(function() { 	   
+	 var availableTags = [
+			#foreach( $fileName in $fileNames )
+				#if($foreach.index >  0)
+					,
+				#end 
+					"$fileName" 
+			#end 
+		];
+	availableTags.sort();
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = $('#tags').val();
+}
+</script>
 </head>
 <body>
 
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags"><button id="go" onclick="myFunction()" >go</button>
+</div>
+
+	<p id="demo" >Click me to change my text color.</p>
+
 	#foreach($file in $files)
-		<li><a href="/controllerFileUploadVelocity/downloadFile.$file.getName()">$file.getName()</a></li>
+		<li>
+			$file.getName()
+			<a href="/controllerFileUploadVelocity/downloadFile.$file.getName()"> download	</a>
+			<a href="/controllerFileUploadVelocity/deleteFile.$file.getName()"> delete	</a>
+			
+		</li>
 	#end
+	
 
 </body>
 </html>

@@ -12,5 +12,5 @@ public interface ItemService {
 	public List<Item> getItems();
 	public Item getItemById(int id);
 	public void removeItem(int id);
-
+	public Item getItemByImgAddress(String fileName);
 }

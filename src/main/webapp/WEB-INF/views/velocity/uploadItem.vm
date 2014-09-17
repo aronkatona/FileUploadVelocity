@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>uploadfile</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="./resources/js/addBonusRowFileUpload.js"></script>
+
+  <script>
+ 	$(document).ready(function(){
+ 		$("#datepicker").datepicker({
+			  autoSize: true,
+			  showOn: "button",
+			  buttonImage: "./resources/img/icon.png",
+			  buttonImageOnly: true,
+			  maxDate: 0
+		});
+	});
+  </script>
+  
+</head>
+<body>
+	<form name="fileUploadForm"   action="/controllerFileUploadVelocity/saveFiles"   method="post" enctype="multipart/form-data">
+		<table id="fileTable">
+                <tr>
+                	<td><input name="name" type="text" placeholder="item name"        /></td>
+                    <td><input name="owner" type="text"  placeholder = "owner"        /></td>
+                    <td><input name="date "type="text" id="datepicker" placeholder = "buy date"   /></td>
+                    <td><input name="file" type="file"  placeholder = "file"          /></td>
+                </tr>
+        </table>
+		<input type="submit" value="Upload" /> <input id="addMoreItem" type="button" value="Add More Item" />
+	</form>
+
+</body>
+</html>

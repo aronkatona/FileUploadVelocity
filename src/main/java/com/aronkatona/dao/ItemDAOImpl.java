@@ -2,6 +2,7 @@ package com.aronkatona.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -49,6 +50,16 @@ public class ItemDAOImpl implements ItemDAO {
 		if(i != null){
 			session.delete(i);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Item getItemByImgAddress(String fileName) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Item where imgAddress = :fileName");
+		query.setParameter("fileName", fileName);		
+		List<Item> itemList = query.list();
+		return itemList.get(0);
 	}
 
 }

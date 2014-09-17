@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Items</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+	
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
+
+
+</head>
+<body>
+
+	#if($editItem ==  "editItem")
+		<form name = "editItem" action="/controllerFileUploadVelocity/editItemExecute.$item.getId()"  method="post">
+			<table id="fileTable">
+	                <tr>
+	                	<td><input name="name" type="text" value=$item.getName()        /></td>
+	                    <td><input name="owner" type="text"  value = $item.getOwner()        /></td>
+	                    <td><input name="date" type="text" id="datepicker" value = $item.getBuyTime()   /></td>
+	                </tr>
+	        </table>
+	        <input type="submit" value="Edit" />
+	    </form>
+	#end
+
+
+	#foreach($item in $items)
+		$item.getName() , $item.getOwner() , $item.getBuyTime() , $item.getImgAddress() ,
+		<a href="./resources/files/$item.getImgAddress()"  target="_blank"> open	</a> ,
+		<a href="/controllerFileUploadVelocity/editItem.$item.getId()"> edit	</a> , 
+		<a href="/controllerFileUploadVelocity/deleteItem.$item.getId()"> delete	</a></br>
+	#end
+
+</body>
+</html>

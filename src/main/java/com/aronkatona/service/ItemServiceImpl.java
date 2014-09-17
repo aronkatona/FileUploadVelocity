@@ -46,4 +46,10 @@ public class ItemServiceImpl implements ItemService{
 		this.itemDAO.removeItem(id);
 	}
 
+	@Override
+	@Transactional
+	public Item getItemByImgAddress(String fileName) {
+		return this.itemDAO.getItemByImgAddress(fileName);
+	}
+
 }
